@@ -10,28 +10,23 @@ Turn an illustration into a clean black-and-white manga page — lines kept cris
 
 <p align="center">
   <img src="examples/panel_1.jpg" width="24%">
-  <img src="examples/panel_2.jpg" width="24%">
   <img src="examples/panel_3.jpg" width="24%">
+  <img src="examples/panel_10.jpg" width="24%">
+  <img src="examples/panel_6.jpg" width="24%">
+</p>
+
+<p align="center">
+  <img src="examples/panel_2.jpg" width="24%">
+  <img src="examples/panel_7.jpg" width="24%">
+  <img src="examples/panel_5.jpg" width="24%">
   <img src="examples/panel_4.jpg" width="24%">
 </p>
 
 <p align="center">
-  <img src="examples/panel_5.jpg" width="24%">
-  <img src="examples/panel_6.jpg" width="24%">
-  <img src="examples/panel_7.jpg" width="24%">
   <img src="examples/panel_8.jpg" width="24%">
-</p>
-
-<p align="center">
-  <img src="examples/panel_9.jpg" width="24%">
-  <img src="examples/panel_10.jpg" width="24%">
   <img src="examples/panel_11.jpg" width="24%">
+  <img src="examples/panel_9.jpg" width="24%">
   <img src="examples/panel_12.jpg" width="24%">
-</p>
-
-<p align="center">
-  <img src="examples/panel_13.jpg" width="24%">
-  <img src="examples/panel_14.jpg" width="24%">
 </p>
 
 More comparisons: [1](examples/compare_1.jpg) · [3](examples/compare_3.jpg) · [4](examples/compare_4.jpg)

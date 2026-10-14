@@ -2,7 +2,7 @@
 
 Turn an illustration into a clean black-and-white manga page — lines kept crisp, values pushed into a few flat areas, real screentone only where it belongs.
 
-**[⬇ Download the workflow (QWEN-Manga.json)](https://github.com/ashukae/ComfyUI-MangaScreen/raw/main/workflows/QWEN-Manga.json)** — right-click → *Save link as*, then drag the file into ComfyUI.
+[Workflow](workflows/QWEN-Manga.json)
 
 <p align="center">
   <img src="examples/panel_1.jpg" width="24%">

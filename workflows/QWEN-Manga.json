@@ -1,0 +1,1356 @@
+{
+ "id": "fb22bacf-d979-4537-b058-608f8b7b2a4f",
+ "revision": 0,
+ "last_node_id": 28,
+ "last_link_id": 32,
+ "nodes": [
+  {
+   "id": 1,
+   "type": "LoadImage",
+   "pos": [
+    -1500,
+    80
+   ],
+   "size": [
+    340,
+    440
+   ],
+   "flags": {},
+   "order": 0,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "COMBO",
+     "widget": {
+      "name": "image"
+     },
+     "link": null
+    },
+    {
+     "name": "upload",
+     "type": "IMAGEUPLOAD",
+     "widget": {
+      "name": "upload"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      1
+     ]
+    },
+    {
+     "name": "MASK",
+     "type": "MASK",
+     "links": []
+    }
+   ],
+   "title": "Input image",
+   "properties": {
+    "Node name for S&R": "LoadImage"
+   },
+   "widgets_values": [
+    "your_image.png",
+    "image"
+   ]
+  },
+  {
+   "id": 2,
+   "type": "ImageScaleToTotalPixels",
+   "pos": [
+    -1500,
+    560
+   ],
+   "size": [
+    340,
+    110
+   ],
+   "flags": {},
+   "order": 9,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 1
+    },
+    {
+     "name": "upscale_method",
+     "type": "COMBO",
+     "widget": {
+      "name": "upscale_method"
+     },
+     "link": null
+    },
+    {
+     "name": "megapixels",
+     "type": "FLOAT",
+     "widget": {
+      "name": "megapixels"
+     },
+     "link": null
+    },
+    {
+     "name": "resolution_steps",
+     "type": "INT",
+     "widget": {
+      "name": "resolution_steps"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      3,
+      31
+     ]
+    }
+   ],
+   "title": "Working size (2 MP)",
+   "properties": {
+    "Node name for S&R": "ImageScaleToTotalPixels"
+   },
+   "widgets_values": [
+    "lanczos",
+    2,
+    32
+   ]
+  },
+  {
+   "id": 3,
+   "type": "UNETLoader",
+   "pos": [
+    -1500,
+    710
+   ],
+   "size": [
+    340,
+    82
+   ],
+   "flags": {},
+   "order": 1,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "unet_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "unet_name"
+     },
+     "link": null
+    },
+    {
+     "name": "weight_dtype",
+     "type": "COMBO",
+     "widget": {
+      "name": "weight_dtype"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      6
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "UNETLoader"
+   },
+   "widgets_values": [
+    "qwen_image_2.1_turbo_int8_convrot.safetensors",
+    "default"
+   ]
+  },
+  {
+   "id": 4,
+   "type": "CLIPLoader",
+   "pos": [
+    -1500,
+    830
+   ],
+   "size": [
+    340,
+    106
+   ],
+   "flags": {},
+   "order": 2,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "clip_name"
+     },
+     "link": null
+    },
+    {
+     "name": "type",
+     "type": "COMBO",
+     "widget": {
+      "name": "type"
+     },
+     "link": null
+    },
+    {
+     "name": "device",
+     "shape": 7,
+     "type": "COMBO",
+     "widget": {
+      "name": "device"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "CLIP",
+     "type": "CLIP",
+     "links": [
+      2
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "CLIPLoader"
+   },
+   "widgets_values": [
+    "qwen3-vl-8b-heretic-1.3.0-int8convrot.safetensors",
+    "qwen_image",
+    "default"
+   ]
+  },
+  {
+   "id": 5,
+   "type": "VAELoader",
+   "pos": [
+    -1500,
+    970
+   ],
+   "size": [
+    340,
+    60
+   ],
+   "flags": {},
+   "order": 3,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "vae_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "vae_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "VAE",
+     "type": "VAE",
+     "links": [
+      4,
+      15
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAELoader"
+   },
+   "widgets_values": [
+    "qwen_image_2.1_vae_bf16.safetensors"
+   ]
+  },
+  {
+   "id": 6,
+   "type": "PrimitiveStringMultiline",
+   "pos": [
+    -1120,
+    80
+   ],
+   "size": [
+    420,
+    300
+   ],
+   "flags": {},
+   "order": 4,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "value",
+     "type": "STRING",
+     "widget": {
+      "name": "value"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "STRING",
+     "type": "STRING",
+     "links": [
+      5
+     ]
+    }
+   ],
+   "title": "Edit instruction",
+   "properties": {
+    "Node name for S&R": "PrimitiveStringMultiline"
+   },
+   "widgets_values": [
+    "Redraw <image1> as a printed black-and-white manga page panel, as if inked by the original artist for serialization. Keep the exact composition, pose, character design, face, expression and drawing style of <image1>. Use confident ink lines with varied line weight, solid black for dark hair and deep shadows, white paper for skin and light surfaces, ink hatching lines for shadows on cloth, and regular screentone only where a mid tone is needed. No color and no smooth gradients. Do not add anything that is not in <image1>."
+   ]
+  },
+  {
+   "id": 7,
+   "type": "TextEncodeQwenImage21",
+   "pos": [
+    -1120,
+    420
+   ],
+   "size": [
+    420,
+    286
+   ],
+   "flags": {},
+   "order": 11,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "clip",
+     "type": "CLIP",
+     "link": 2
+    },
+    {
+     "name": "images.image_1",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 3
+    },
+    {
+     "name": "images.image_2",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "images.image_3",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "images.image_4",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": null
+    },
+    {
+     "name": "vae",
+     "shape": 7,
+     "type": "VAE",
+     "link": 4
+    },
+    {
+     "name": "prompt",
+     "type": "STRING",
+     "widget": {
+      "name": "prompt"
+     },
+     "link": 5
+    },
+    {
+     "name": "negative_prompt",
+     "type": "STRING",
+     "widget": {
+      "name": "negative_prompt"
+     },
+     "link": null
+    },
+    {
+     "name": "resolution",
+     "type": "INT",
+     "widget": {
+      "name": "resolution"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "positive",
+     "type": "CONDITIONING",
+     "links": [
+      8
+     ]
+    },
+    {
+     "name": "negative",
+     "type": "CONDITIONING",
+     "links": []
+    },
+    {
+     "name": "latent",
+     "type": "LATENT",
+     "links": [
+      13
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "TextEncodeQwenImage21"
+   },
+   "widgets_values": [
+    "",
+    "",
+    0
+   ]
+  },
+  {
+   "id": 8,
+   "type": "QwenImage21Cache",
+   "pos": [
+    -1120,
+    740
+   ],
+   "size": [
+    420,
+    82
+   ],
+   "flags": {},
+   "order": 10,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 6
+    },
+    {
+     "name": "device",
+     "type": "COMBO",
+     "widget": {
+      "name": "device"
+     },
+     "link": null
+    },
+    {
+     "name": "dtype",
+     "type": "COMBO",
+     "widget": {
+      "name": "dtype"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "MODEL",
+     "type": "MODEL",
+     "links": [
+      7
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "QwenImage21Cache"
+   },
+   "widgets_values": [
+    "cpu",
+    "default"
+   ]
+  },
+  {
+   "id": 9,
+   "type": "BasicGuider",
+   "pos": [
+    -1120,
+    860
+   ],
+   "size": [
+    420,
+    50
+   ],
+   "flags": {},
+   "order": 13,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "model",
+     "type": "MODEL",
+     "link": 7
+    },
+    {
+     "name": "conditioning",
+     "type": "CONDITIONING",
+     "link": 8
+    }
+   ],
+   "outputs": [
+    {
+     "name": "GUIDER",
+     "type": "GUIDER",
+     "links": [
+      10
+     ]
+    }
+   ],
+   "title": "Guider (cfg 1)",
+   "properties": {
+    "Node name for S&R": "BasicGuider"
+   }
+  },
+  {
+   "id": 10,
+   "type": "RandomNoise",
+   "pos": [
+    -1120,
+    950
+   ],
+   "size": [
+    420,
+    82
+   ],
+   "flags": {},
+   "order": 5,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "noise_seed",
+     "type": "INT",
+     "widget": {
+      "name": "noise_seed"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "NOISE",
+     "type": "NOISE",
+     "links": [
+      9
+     ]
+    }
+   ],
+   "title": "Seed",
+   "properties": {
+    "Node name for S&R": "RandomNoise"
+   },
+   "widgets_values": [
+    1,
+    "randomize"
+   ]
+  },
+  {
+   "id": 11,
+   "type": "KSamplerSelect",
+   "pos": [
+    -1120,
+    1070
+   ],
+   "size": [
+    420,
+    60
+   ],
+   "flags": {},
+   "order": 6,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "sampler_name",
+     "type": "COMBO",
+     "widget": {
+      "name": "sampler_name"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "SAMPLER",
+     "type": "SAMPLER",
+     "links": [
+      11
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "KSamplerSelect"
+   },
+   "widgets_values": [
+    "euler"
+   ]
+  },
+  {
+   "id": 12,
+   "type": "ManualSigmas",
+   "pos": [
+    -1120,
+    1170
+   ],
+   "size": [
+    420,
+    60
+   ],
+   "flags": {},
+   "order": 7,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "sigmas",
+     "type": "STRING",
+     "widget": {
+      "name": "sigmas"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "SIGMAS",
+     "type": "SIGMAS",
+     "links": [
+      12
+     ]
+    }
+   ],
+   "title": "Turbo 8-step sigmas",
+   "properties": {
+    "Node name for S&R": "ManualSigmas"
+   },
+   "widgets_values": [
+    "1.0, 0.978453, 0.95418, 0.926626, 0.89508, 0.845148, 0.704534, 0.414568, 0.0"
+   ]
+  },
+  {
+   "id": 13,
+   "type": "SamplerCustomAdvanced",
+   "pos": [
+    -660,
+    80
+   ],
+   "size": [
+    300,
+    326
+   ],
+   "flags": {},
+   "order": 14,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "noise",
+     "type": "NOISE",
+     "link": 9
+    },
+    {
+     "name": "guider",
+     "type": "GUIDER",
+     "link": 10
+    },
+    {
+     "name": "sampler",
+     "type": "SAMPLER",
+     "link": 11
+    },
+    {
+     "name": "sigmas",
+     "type": "SIGMAS",
+     "link": 12
+    },
+    {
+     "name": "latent_image",
+     "type": "LATENT",
+     "link": 13
+    }
+   ],
+   "outputs": [
+    {
+     "name": "output",
+     "type": "LATENT",
+     "links": [
+      14
+     ]
+    },
+    {
+     "name": "denoised_output",
+     "type": "LATENT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "SamplerCustomAdvanced"
+   }
+  },
+  {
+   "id": 14,
+   "type": "VAEDecode",
+   "pos": [
+    -660,
+    460
+   ],
+   "size": [
+    300,
+    50
+   ],
+   "flags": {},
+   "order": 15,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "samples",
+     "type": "LATENT",
+     "link": 14
+    },
+    {
+     "name": "vae",
+     "type": "VAE",
+     "link": 15
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      16,
+      21,
+      29
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "VAEDecode"
+   }
+  },
+  {
+   "id": 15,
+   "type": "MangaFinish",
+   "pos": [
+    -660,
+    550
+   ],
+   "size": [
+    300,
+    246
+   ],
+   "flags": {},
+   "order": 19,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 16
+    },
+    {
+     "name": "pen_lines",
+     "shape": 7,
+     "type": "IMAGE",
+     "link": 22
+    },
+    {
+     "name": "screen_lines",
+     "type": "INT",
+     "widget": {
+      "name": "screen_lines"
+     },
+     "link": null
+    },
+    {
+     "name": "white_point",
+     "type": "FLOAT",
+     "widget": {
+      "name": "white_point"
+     },
+     "link": null
+    },
+    {
+     "name": "black_point",
+     "type": "FLOAT",
+     "widget": {
+      "name": "black_point"
+     },
+     "link": null
+    },
+    {
+     "name": "light_tone",
+     "type": "FLOAT",
+     "widget": {
+      "name": "light_tone"
+     },
+     "link": null
+    },
+    {
+     "name": "dark_tone",
+     "type": "FLOAT",
+     "widget": {
+      "name": "dark_tone"
+     },
+     "link": null
+    },
+    {
+     "name": "gradation",
+     "type": "FLOAT",
+     "widget": {
+      "name": "gradation"
+     },
+     "link": null
+    },
+    {
+     "name": "pen_threshold",
+     "type": "FLOAT",
+     "widget": {
+      "name": "pen_threshold"
+     },
+     "link": null
+    },
+    {
+     "name": "white_lines",
+     "type": "FLOAT",
+     "widget": {
+      "name": "white_lines"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      17,
+      32
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MangaFinish"
+   },
+   "widgets_values": [
+    250,
+    0.8,
+    0.3,
+    0.18,
+    0.42,
+    1,
+    0.3,
+    0.4
+   ],
+   "title": "Manga Finish"
+  },
+  {
+   "id": 16,
+   "type": "SaveImage",
+   "pos": [
+    -330,
+    80
+   ],
+   "size": [
+    620,
+    880
+   ],
+   "flags": {},
+   "order": 23,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "link": 23
+    },
+    {
+     "name": "filename_prefix",
+     "type": "STRING",
+     "widget": {
+      "name": "filename_prefix"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "images",
+     "type": "IMAGE",
+     "links": []
+    }
+   ],
+   "title": "Save",
+   "properties": {
+    "Node name for S&R": "SaveImage"
+   },
+   "widgets_values": [
+    "MangaScreen/manga"
+   ]
+  },
+  {
+   "id": 21,
+   "type": "Manga2Anime_LineArt_Preprocessor",
+   "pos": [
+    -660,
+    1140
+   ],
+   "size": [
+    300,
+    82
+   ],
+   "flags": {},
+   "order": 17,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 21
+    },
+    {
+     "name": "resolution",
+     "shape": 7,
+     "type": "INT",
+     "widget": {
+      "name": "resolution"
+     },
+     "link": 30
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      22
+     ]
+    }
+   ],
+   "title": "Pen lines (Manga Line Extraction)",
+   "properties": {
+    "Node name for S&R": "Manga2Anime_LineArt_Preprocessor"
+   },
+   "widgets_values": [
+    1280
+   ]
+  },
+  {
+   "id": 22,
+   "type": "MangaPanel",
+   "pos": [
+    -660,
+    1278.8889567057295
+   ],
+   "size": [
+    300,
+    250
+   ],
+   "flags": {},
+   "order": 20,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 17
+    },
+    {
+     "name": "frame",
+     "type": "COMBO",
+     "widget": {
+      "name": "frame"
+     },
+     "link": null
+    },
+    {
+     "name": "crop_x",
+     "type": "FLOAT",
+     "widget": {
+      "name": "crop_x"
+     },
+     "link": null
+    },
+    {
+     "name": "crop_y",
+     "type": "FLOAT",
+     "widget": {
+      "name": "crop_y"
+     },
+     "link": null
+    },
+    {
+     "name": "border",
+     "type": "INT",
+     "widget": {
+      "name": "border"
+     },
+     "link": null
+    },
+    {
+     "name": "margin",
+     "type": "INT",
+     "widget": {
+      "name": "margin"
+     },
+     "link": null
+    },
+    {
+     "name": "paper",
+     "type": "COMBO",
+     "widget": {
+      "name": "paper"
+     },
+     "link": null
+    },
+    {
+     "name": "ink",
+     "type": "FLOAT",
+     "widget": {
+      "name": "ink"
+     },
+     "link": null
+    }
+   ],
+   "outputs": [
+    {
+     "name": "IMAGE",
+     "type": "IMAGE",
+     "links": [
+      23
+     ]
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "MangaPanel"
+   },
+   "widgets_values": [
+    "original",
+    0.5,
+    0.4,
+    5,
+    60,
+    "white",
+    0.5
+   ],
+   "title": "Manga Panel"
+  },
+  {
+   "id": 26,
+   "type": "GetImageSize",
+   "pos": [
+    -660,
+    1260
+   ],
+   "size": [
+    300,
+    90
+   ],
+   "flags": {},
+   "order": 18,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image",
+     "type": "IMAGE",
+     "link": 29
+    }
+   ],
+   "outputs": [
+    {
+     "name": "width",
+     "type": "INT",
+     "links": [
+      30
+     ]
+    },
+    {
+     "name": "height",
+     "type": "INT",
+     "links": []
+    },
+    {
+     "name": "batch_size",
+     "type": "INT",
+     "links": []
+    }
+   ],
+   "properties": {
+    "Node name for S&R": "GetImageSize"
+   },
+   "title": "Pen line resolution = image width"
+  },
+  {
+   "id": 27,
+   "type": "ImageCompare",
+   "pos": [
+    370,
+    80
+   ],
+   "size": [
+    620,
+    700
+   ],
+   "flags": {},
+   "order": 19,
+   "mode": 0,
+   "inputs": [
+    {
+     "name": "image_a",
+     "type": "IMAGE",
+     "link": 31,
+     "shape": 7
+    },
+    {
+     "name": "image_b",
+     "type": "IMAGE",
+     "link": 32,
+     "shape": 7
+    }
+   ],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "ImageCompare"
+   },
+   "title": "Original / result"
+  },
+  {
+   "id": 28,
+   "type": "Note",
+   "pos": [
+    -1500,
+    1070
+   ],
+   "size": [
+    420,
+    420
+   ],
+   "flags": {},
+   "order": 20,
+   "mode": 0,
+   "inputs": [],
+   "outputs": [],
+   "properties": {
+    "Node name for S&R": "Note"
+   },
+   "widgets_values": [
+    "Bolder edit instruction: dark colours go solid black. Paste it into \"Edit instruction\" and set black_point to 0.40.\n\nRedraw <image1> as a printed black-and-white manga page panel, as if inked by the original artist for serialization. Keep the exact composition, pose, character design, face, expression and drawing style of <image1>. Use confident ink lines with varied line weight. Decide every area as paper white, screentone, or solid black ink: anything that is dark or black in color in <image1> (dark clothing, dark hair, deep shadows) is filled with solid black ink, with its folds and seams left as thin white lines; skin and light surfaces stay white paper; mid colors become flat screentone. No grey gradients, no soft airbrushed shading, no color. Do not add anything that is not in <image1>."
+   ],
+   "title": "Edit instruction B"
+  }
+ ],
+ "links": [
+  [
+   1,
+   1,
+   0,
+   2,
+   0,
+   "IMAGE"
+  ],
+  [
+   6,
+   3,
+   0,
+   8,
+   0,
+   "MODEL"
+  ],
+  [
+   7,
+   8,
+   0,
+   9,
+   0,
+   "MODEL"
+  ],
+  [
+   8,
+   7,
+   0,
+   9,
+   1,
+   "CONDITIONING"
+  ],
+  [
+   9,
+   10,
+   0,
+   13,
+   0,
+   "NOISE"
+  ],
+  [
+   10,
+   9,
+   0,
+   13,
+   1,
+   "GUIDER"
+  ],
+  [
+   11,
+   11,
+   0,
+   13,
+   2,
+   "SAMPLER"
+  ],
+  [
+   12,
+   12,
+   0,
+   13,
+   3,
+   "SIGMAS"
+  ],
+  [
+   13,
+   7,
+   2,
+   13,
+   4,
+   "LATENT"
+  ],
+  [
+   14,
+   13,
+   0,
+   14,
+   0,
+   "LATENT"
+  ],
+  [
+   15,
+   5,
+   0,
+   14,
+   1,
+   "VAE"
+  ],
+  [
+   16,
+   14,
+   0,
+   15,
+   0,
+   "IMAGE"
+  ],
+  [
+   17,
+   15,
+   0,
+   22,
+   0,
+   "IMAGE"
+  ],
+  [
+   21,
+   14,
+   0,
+   21,
+   0,
+   "IMAGE"
+  ],
+  [
+   22,
+   21,
+   0,
+   15,
+   1,
+   "IMAGE"
+  ],
+  [
+   23,
+   22,
+   0,
+   16,
+   0,
+   "IMAGE"
+  ],
+  [
+   2,
+   4,
+   0,
+   7,
+   0,
+   "CLIP"
+  ],
+  [
+   3,
+   2,
+   0,
+   7,
+   1,
+   "IMAGE"
+  ],
+  [
+   4,
+   5,
+   0,
+   7,
+   5,
+   "VAE"
+  ],
+  [
+   5,
+   6,
+   0,
+   7,
+   6,
+   "STRING"
+  ],
+  [
+   29,
+   14,
+   0,
+   26,
+   0,
+   "IMAGE"
+  ],
+  [
+   30,
+   26,
+   0,
+   21,
+   1,
+   "INT"
+  ],
+  [
+   31,
+   2,
+   0,
+   27,
+   0,
+   "IMAGE"
+  ],
+  [
+   32,
+   15,
+   0,
+   27,
+   1,
+   "IMAGE"
+  ]
+ ],
+ "groups": [],
+ "config": {},
+ "extra": {
+  "ds": {
+   "scale": 0.6,
+   "offset": [
+    1600,
+    100
+   ]
+  }
+ },
+ "version": 0.4
+}

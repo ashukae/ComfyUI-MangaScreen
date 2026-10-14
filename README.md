@@ -2,12 +2,6 @@
 
 Turn an illustration into a clean black-and-white manga page — lines kept crisp, values pushed into a few flat areas, real screentone only where it belongs.
 
-[English](#english) · [한국어](#한국어) · [日本語](#日本語)
-
-![Manga Finish results](examples/showcase.jpg)
-
-![Original / plain halftone filter / Manga Finish](examples/compare_2.jpg)
-
 <p align="center">
   <img src="examples/panel_1.jpg" width="24%">
   <img src="examples/panel_3.jpg" width="24%">
@@ -29,9 +23,15 @@ Turn an illustration into a clean black-and-white manga page — lines kept cris
   <img src="examples/panel_12.jpg" width="24%">
 </p>
 
-More comparisons: [1](examples/compare_1.jpg) · [3](examples/compare_3.jpg) · [4](examples/compare_4.jpg)
+[English](#english) · [한국어](#한국어) · [日本語](#日本語)
 
 ## English
+
+![Manga Finish results](examples/showcase.jpg)
+
+![Original / plain halftone filter / Manga Finish](examples/compare_2.jpg)
+
+More comparisons: [1](examples/compare_1.jpg) · [3](examples/compare_3.jpg) · [4](examples/compare_4.jpg)
 
 ### What it does
 

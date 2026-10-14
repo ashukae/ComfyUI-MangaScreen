@@ -8,7 +8,14 @@ Turn an illustration into a clean black-and-white manga page — lines kept cris
 
 ![Original / plain halftone filter / Manga Finish](examples/compare_2.jpg)
 
-More: [compare 1](examples/compare_1.jpg) · [compare 3](examples/compare_3.jpg) · [compare 4](examples/compare_4.jpg) · panels [1](examples/panel_1.jpg) [2](examples/panel_2.jpg) [3](examples/panel_3.jpg) [4](examples/panel_4.jpg)
+<p align="center">
+  <img src="examples/panel_1.jpg" width="24%">
+  <img src="examples/panel_2.jpg" width="24%">
+  <img src="examples/panel_3.jpg" width="24%">
+  <img src="examples/panel_4.jpg" width="24%">
+</p>
+
+More comparisons: [1](examples/compare_1.jpg) · [3](examples/compare_3.jpg) · [4](examples/compare_4.jpg)
 
 ## English
 

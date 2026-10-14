@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-mangascreen"
 description = "Turn an illustration into a clean black-and-white manga page: crisp lines, flat tone areas, real screentone, white lines inside solid black, and panel framing."
-version = "0.1.0"
+version = "0.2.0"
 license = { file = "LICENSE" }
 dependencies = ["opencv-python", "numpy"]
 

@@ -2,6 +2,8 @@
 manga page. Keeps the drawing (lines, hatching, where it is dark), throws away every dot or soft grey
 the image already has, pushes the values into a few flat regions and prints them with a real screen.
 
+Manga Levels: grayscale + levels, the light path when no edit model is used.
+
 Manga Panel: frames the finished page as a panel (crop, border, margin) with a light paper/ink look.
 """
 import cv2
@@ -230,5 +232,29 @@ class MangaPanel:
         return (torch.stack(out).float().to(image.device),)
 
 
-NODE_CLASS_MAPPINGS = {"MangaFinish": MangaFinish, "MangaPanel": MangaPanel}
-NODE_DISPLAY_NAME_MAPPINGS = {"MangaFinish": "Manga Finish", "MangaPanel": "Manga Panel"}
+class MangaLevels:
+    """Grayscale + levels: the light path without an edit model. Brightens until skin and light
+    colours turn to paper, so Manga Finish only tones what is really dark."""
+
+    @classmethod
+    def INPUT_TYPES(cls):
+        return {"required": {
+            "image": ("IMAGE",),
+            "black": ("FLOAT", {"default": 0.20, "min": 0.0, "max": 0.9, "step": 0.01, "tooltip": "Input darker than this becomes black."}),
+            "white": ("FLOAT", {"default": 0.70, "min": 0.1, "max": 1.0, "step": 0.01,
+                                "tooltip": "Input brighter than this becomes white. Lower it until skin and light hair lose their tone."}),
+            "gamma": ("FLOAT", {"default": 1.3, "min": 0.3, "max": 3.0, "step": 0.05, "tooltip": "Above 1 brightens the mid tones."}),
+        }}
+
+    RETURN_TYPES = ("IMAGE",)
+    FUNCTION = "apply"
+    CATEGORY = "image/postprocessing"
+
+    def apply(self, image, black, white, gamma):
+        g = (image[..., :3] * torch.tensor([0.299, 0.587, 0.114], device=image.device, dtype=image.dtype)).sum(-1, keepdim=True)
+        g = ((g - black) / max(white - black, 1e-3)).clamp(0, 1) ** (1 / gamma)
+        return (g.expand(-1, -1, -1, 3).contiguous(),)
+
+
+NODE_CLASS_MAPPINGS = {"MangaLevels": MangaLevels, "MangaFinish": MangaFinish, "MangaPanel": MangaPanel}
+NODE_DISPLAY_NAME_MAPPINGS = {"MangaLevels": "Manga Levels", "MangaFinish": "Manga Finish", "MangaPanel": "Manga Panel"}

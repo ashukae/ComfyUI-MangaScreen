@@ -11,4 +11,3 @@ Repository = "https://github.com/ashukae/ComfyUI-MangaScreen"
 [tool.comfy]
 PublisherId = "ashukae"
 DisplayName = "Manga Screen"
-Icon = ""

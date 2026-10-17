@@ -1,6 +1,6 @@
 # ComfyUI-MangaScreen
 
-Turn an illustration into a clean black-and-white manga page — lines kept crisp, values pushed into a few flat areas, real screentone only where it belongs.
+A manga / black & white comic filter for ComfyUI. Turn an illustration into a clean B&W manga or comic page — lines kept crisp, values pushed into a few flat areas, real screentone only where it belongs.
 
 Workflows: [QWEN-Manga](workflows/QWEN-Manga.json) · [Manga-Lite](workflows/Manga-Lite.json) (no edit model)
 

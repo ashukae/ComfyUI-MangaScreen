@@ -1,7 +1,7 @@
 [project]
 name = "comfyui-mangascreen"
 description = "Manga / black & white comic filter: turn an illustration into a clean B&W manga or comic page with crisp lines, flat tone areas, real screentone (halftone), white lines inside solid black, and panel framing."
-version = "0.2.1"
+version = "0.2.2"
 license = { file = "LICENSE" }
 dependencies = ["opencv-python", "numpy"]
 

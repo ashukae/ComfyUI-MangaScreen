@@ -186,8 +186,9 @@ def cut_panel(ink, ratio, x, y, border, margin):
     cw, ch = min(cw, w), min(ch, h)
     x0, y0 = round((w - cw) * x), round((h - ch) * y)
     p = ink[y0:y0 + ch, x0:x0 + cw].copy()
-    p[:border] = p[-border:] = True
-    p[:, :border] = p[:, -border:] = True
+    if border:
+        p[:border] = p[-border:] = True
+        p[:, :border] = p[:, -border:] = True
     return np.pad(p, margin, constant_values=False)
 
 
